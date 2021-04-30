@@ -1,28 +1,72 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Editor
+      :value="value"
+      :plugins="plugins"
+      @change="handleChange"
+      :locale="EditorLanguage"
+      class="editor"
+    ></Editor>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import { Editor } from '@bytemd/vue';
+import EditorLanguage from 'bytemd/lib/locales/zh_Hans.json';
+import gfm from '@bytemd/plugin-gfm';
+import GfmLanguage from '@bytemd/plugin-gfm/lib/locales/zh_Hans.json';
+import highlight from '@bytemd/plugin-highlight';
+import frontmatter from '@bytemd/plugin-frontmatter';
+import footnotes from '@bytemd/plugin-footnotes';
+import gemoji from '@bytemd/plugin-gemoji';
+import math from '@bytemd/plugin-math';
+import mermaid from '@bytemd/plugin-mermaid';
+import MermaidLanguage from '@bytemd/plugin-mermaid/lib/locales/zh_Hans.json';
+import MediumZoom from '@bytemd/plugin-medium-zoom';
+import highlightStyle from './plugin/highlightStyle/index';
+import themeStyle from './plugin/themes/index';
+import wechatCopy from './plugin/wechat-copy/index';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld,
+  components: { Editor },
+  data() {
+    return {
+      value: '',
+      plugins: [
+        mermaid({
+          locale: MermaidLanguage,
+        }),
+        gfm({
+          locale: GfmLanguage,
+        }),
+        frontmatter(),
+        footnotes(),
+        gemoji(),
+        math(),
+        MediumZoom(),
+        highlight(),
+        themeStyle(),
+        highlightStyle(),
+        wechatCopy(),
+      ],
+      EditorLanguage,
+    };
+  },
+  methods: {
+    handleChange(v) {
+      this.value = v;
+    },
   },
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.editor >>> .bytemd {
+  height: 100vh;
+}
+
+.editor >>> .bytemd-tippy-right:last-child {
+  display: none;
 }
 </style>
