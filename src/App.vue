@@ -19,10 +19,6 @@ import highlight from '@bytemd/plugin-highlight';
 import frontmatter from '@bytemd/plugin-frontmatter';
 import footnotes from '@bytemd/plugin-footnotes';
 import gemoji from '@bytemd/plugin-gemoji';
-import math from '@bytemd/plugin-math';
-import mermaid from '@bytemd/plugin-mermaid';
-import MermaidLanguage from '@bytemd/plugin-mermaid/lib/locales/zh_Hans.json';
-import MediumZoom from '@bytemd/plugin-medium-zoom';
 import highlightStyle from './plugin/highlightStyle/index';
 import themeStyle from './plugin/themes/index';
 import wechatCopy from './plugin/wechat-copy/index';
@@ -34,17 +30,12 @@ export default {
     return {
       value: '',
       plugins: [
-        mermaid({
-          locale: MermaidLanguage,
-        }),
         gfm({
           locale: GfmLanguage,
         }),
         frontmatter(),
         footnotes(),
         gemoji(),
-        math(),
-        MediumZoom(),
         highlight(),
         themeStyle(),
         highlightStyle(),
