@@ -12,7 +12,6 @@ export default function themeStyle() {
             const copyBtnEle = item.root.getElementsByClassName('bytemd-tippy')[16];
             const markdownBodyEle = item.root.getElementsByClassName('markdown-body')[0];
             copyBtnEle.id = 'copy-btn';
-            markdownBodyEle.id = 'markdown-body';
             const clipboard = new Clipboard('#copy-btn', {
               target() {
                 return markdownBodyEle;
