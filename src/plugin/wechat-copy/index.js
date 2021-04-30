@@ -9,7 +9,7 @@ export default function themeStyle() {
         handler: {
           type: 'action',
           click(item) {
-            const copyBtnEle = item.root.getElementsByClassName('bytemd-tippy')[16];
+            const copyBtnEle = item.root.getElementsByClassName('bytemd-tippy')[14];
             const markdownBodyEle = item.root.getElementsByClassName('markdown-body')[0];
             copyBtnEle.id = 'copy-btn';
             const clipboard = new Clipboard('#copy-btn', {
